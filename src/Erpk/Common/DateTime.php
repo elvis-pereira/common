@@ -28,8 +28,7 @@ class DateTime extends DT
     public function getDay()
     {
         $firstDay = new self(self::FIRST_DAY);
-        $now = new self;
-        $diff = $now->diff($firstDay);
+        $diff = $this->diff($firstDay);
         return $diff->days;
     }
 }
