@@ -88,7 +88,9 @@ class Rank
         'God of War'=>50000000,
         'God of War*'=>100000000,
         'God of War**'=>200000000,
-        'God of War***'=>500000000
+        'God of War***'=>500000000,
+
+        '?' => 90000000000
     );
     
     public function __construct($points)
@@ -134,6 +136,17 @@ class Rank
     public function getPointsToAdvance()
     {
         $ranks = array_values(self::$ranks);
-        return $ranks[$this->level+1] - $this->points;
+        return $ranks[$this->level] - $this->points;
+    }
+
+    public function toArray()
+    {
+        return array(
+            'name' => $this->getName(),
+            'level' =>  $this->getLevel(),
+            'points' =>  $this->getPoints(),
+            'image' => $this->getImage(),
+            'toNext' => $this->getPointsToAdvance()
+        );
     }
 }
