@@ -3,14 +3,14 @@ namespace Erpk\Common\Tests;
 
 use Erpk\Common\Tests\TestCase;
 use Erpk\Common\Entity\Country;
-use Erpk\Common\Entity\Battle;
+use Erpk\Common\Entity\Campaign;
 
-class BattleTest extends TestCase
+class CampaignTest extends TestCase
 {
     public function __construct()
     {
         $this->em   = $this->getEntityManager();
-        $this->repo = $this->em->getRepository('Erpk\Common\Entity\Battle');
+        $this->repo = $this->em->getRepository('Erpk\Common\Entity\Campaign');
     }
     
     public function testNotFound()
@@ -18,7 +18,7 @@ class BattleTest extends TestCase
         $this->assertNull($this->repo->find(56465132));
     }
     
-    public function testInsertBattle()
+    public function testInsertCampaign()
     {
         $countries = $this->em->getRepository('Erpk\Common\Entity\Country');
         $regions = $this->em->getRepository('Erpk\Common\Entity\Region');
@@ -26,7 +26,7 @@ class BattleTest extends TestCase
         $attacker = new Country;
         $attacker->setId(35);
         
-        $b = new Battle;
+        $b = new Campaign;
         $b->setId(123456789);
         $b->setAttacker($countries->find(35));
         $b->setDefender($countries->find(1));
@@ -37,7 +37,7 @@ class BattleTest extends TestCase
         $this->em->flush();
     }
     
-    public function testRemoveBattle()
+    public function testRemoveCampaign()
     {
         $b = $this->repo->find(123456789);
         $this->em->remove($b);

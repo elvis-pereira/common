@@ -2,10 +2,10 @@
 namespace Erpk\Common\Entity;
 
 /**
- * @Entity(repositoryClass="Erpk\Common\Repository\Battle")
+ * @Entity(repositoryClass="Erpk\Common\Repository\Campaign")
  * @Table(name="battles")
  **/
-class Battle
+class Campaign
 {
     /**
      * @Id @Column(type="integer")
