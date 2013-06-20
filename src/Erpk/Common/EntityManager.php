@@ -12,7 +12,6 @@ class EntityManager
         if (!self::$instance) {
             $db = __DIR__.'/Storage.db';
             
-            chmod($db, 0777);
             $paths = array(__DIR__.'/Model');
             $conn = array(
                 'driver' => 'pdo_sqlite',
