@@ -3,10 +3,34 @@ namespace Erpk\Common\Citizen;
 
 class Rank
 {
+    /**
+     * Current rank points
+     * @var int
+     */
     protected $points;
+
+    /**
+     * URL to rank image
+     * @var string
+     */
     protected $image;
+
+    /**
+     * Current rank name
+     * @var string
+     */
     protected $name;
+
+    /**
+     * Current rank level
+     * @var int
+     */
     protected $level;
+
+    /**
+     * Ranks table
+     * @var array
+     */
     protected static $ranks = array(
         'Recruit' => 0,
         
@@ -95,53 +119,90 @@ class Rank
         'Titan**'  => 4000000000,
         'Titan***' => 10000000000
     );
-    
-    public function __construct($points)
+
+    /**
+     * Construct Rank object
+     * @param int $rankPoints Rank points
+     * @param int $rankLevel  Rank level (optionally, when null,
+     *                        it will be calculated with rank points)
+     */
+    public function __construct($rankPoints, $rankLevel = null)
     {
-        $this->points = $points;
-        
-        $level = count(self::$ranks);
-        foreach (array_reverse(self::$ranks) as $name => $p) {
-            if ($points >= $p) {
-                $this->name = $name;
-                $this->level = $level;
-                break;
+        if ($rankLevel === null) {
+            $rankLevel = count(self::$ranks);
+
+            foreach (array_reverse(self::$ranks) as $name => $p) {
+                if ($rankPoints >= $p) {
+                    $this->name  = $name;
+                    $this->level = $rankLevel;
+                    break;
+                }
+                $rankLevel--;
             }
-            $level--;
+        } else {
+            $names = array_keys(self::$ranks);
+            $this->name  = $names[$rankLevel-1];
+            $this->level = $rankLevel;
         }
+
+        $this->points = $rankPoints;
     }
     
+    /**
+     * Returns rank points
+     * @return int Rank points
+     */
     public function getPoints()
     {
         return $this->points;
     }
     
+    /**
+     * Returns rank level
+     * @return int Rank level
+     */
     public function getLevel()
     {
         return $this->level;
     }
     
+    /**
+     * Returns rank name
+     * @return string Rank name
+     */
     public function getName()
     {
         return $this->name;
     }
     
+    /**
+     * Returns URL to rank image
+     * @return string URL to rank image
+     */
     public function getImage()
     {
         $name = $this->name;
-        $n = substr_count($name, '*');
+        $n    = substr_count($name, '*');
         $name = strtr($name, array(' '=>'_', '*'=>'', '.'=>''));
         return
-            'http://www.erepublik.com/images/modules/ranks/'.
+            'http://s1.www.erepublik.net/images/modules/ranks/'.
             strtolower($name).'_'.$n.'.png';
     }
     
+    /**
+     * Returns rank points needed to advance to next rank level
+     * @return int Rank points needed to advance
+     */
     public function getPointsToAdvance()
     {
         $ranks = array_values(self::$ranks);
         return $ranks[$this->level] - $this->points;
     }
 
+    /**
+     * Converts object to array
+     * @return array Array of values
+     */
     public function toArray()
     {
         return array(
