@@ -3,6 +3,7 @@ namespace Erpk\Common\Tests\Citizen;
 
 use Erpk\Common\Tests\TestCase;
 use Erpk\Common\DateTime;
+use DateTimeZone;
 
 class DateTimeTest extends TestCase
 {

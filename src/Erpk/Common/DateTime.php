@@ -8,7 +8,7 @@ use DateInterval;
 class DateTime extends DT
 {
     const FIRST_DAY = '2007-11-20';
-    const ERPK_TIMEZONE = 'PDT';
+    const ERPK_TIMEZONE = 'America/Los_Angeles';
     
     public function __construct($time = 'now')
     {
