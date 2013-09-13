@@ -1,9 +1,10 @@
-#Introduction
-It's bundle of useful eRepublik's utilities.
-#Erpk\Common\DateTime
+Introduction
+------------
+It is bundle of useful eRepublik's utilities.
+###Erpk\Common\DateTime
 That class extends original PHP [DateTime](http://php.net/manual/en/class.datetime.php).
 Examples:
-###Create DateTime from eRepublik day
+####Create DateTime from eRepublik day
 ```php
 <?php
 use Erpk\Common\DateTime;
@@ -14,7 +15,7 @@ Output
 ```
 Day 1849 is 2012-12-12
 ```
-###Show current eRepublik day
+###3Show current eRepublik day
 ```php
 <?php
 use Erpk\Common\DateTime;

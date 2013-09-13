@@ -1,7 +1,7 @@
 {
     "name": "erpk/common",
     "require": {
-        "doctrine/orm": "2.3.*"
+        "doctrine/orm": "2.4.*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",

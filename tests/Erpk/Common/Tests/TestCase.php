@@ -5,8 +5,13 @@ use Erpk\Common\EntityManager;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
+    protected $entityManager;
+
     public function getEntityManager()
     {
-        return EntityManager::getInstance();
+        if ($this->entityManager === null) {
+            $this->entityManager = new EntityManager();
+        }
+        return $this->entityManager;
     }
 }

@@ -11,7 +11,7 @@ $client->setPublicKey($argv[2]);
 /**
  * Load countries
  */
-$entityManager = Erpk\Common\EntityManager::getInstance();
+$entityManager = new Erpk\Common\EntityManager();
 $entityManager->createQuery('DELETE FROM Erpk\Common\Entity\Country')->getResult();
 
 $countriesData = $client->call('countries', 'index');
