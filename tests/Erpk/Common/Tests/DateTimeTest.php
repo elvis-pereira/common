@@ -1,5 +1,5 @@
 <?php
-namespace Erpk\Common\Tests\Citizen;
+namespace Erpk\Common\Tests;
 
 use Erpk\Common\Tests\TestCase;
 use Erpk\Common\DateTime;
