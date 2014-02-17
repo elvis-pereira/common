@@ -46,14 +46,14 @@ class Helpers
      */
     public static function getDivision($level)
     {
-        if ($level <= 24) {
-            return 1;
-        } elseif ($level <= 29) {
-            return 2;
-        } elseif ($level <= 36) {
-            return 3;
-        } else {
+        if ($level >= 70) {
             return 4;
+        } else if ($level >= 50) {
+            return 3;
+        } else if ($level >= 35) {
+            return 2;
+        } else {
+            return 1;
         }
     }
 }

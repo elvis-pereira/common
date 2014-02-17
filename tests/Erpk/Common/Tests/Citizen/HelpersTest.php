@@ -36,4 +36,16 @@ class HelpersTest extends TestCase
     {
         $this->assertEquals(10590, Helpers::getHit(31212, 62));
     }
+
+    public function testGetDivision()
+    {
+        $this->assertEquals(1, Helpers::getDivision(0));
+        $this->assertEquals(1, Helpers::getDivision(34));
+        $this->assertEquals(2, Helpers::getDivision(35));
+        $this->assertEquals(2, Helpers::getDivision(49));
+        $this->assertEquals(3, Helpers::getDivision(50));
+        $this->assertEquals(3, Helpers::getDivision(69));
+        $this->assertEquals(4, Helpers::getDivision(70));
+        $this->assertEquals(4, Helpers::getDivision(150));
+    }
 }
