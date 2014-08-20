@@ -22,6 +22,11 @@ class RankTest extends TestCase
         $rank = new Rank(10000000001);
         $this->assertEquals(69, $rank->getLevel());
         $this->assertEquals('Titan***', $rank->getName());
+        $this->assertEquals(79999999999, $rank->getPointsToAdvance());
+
+        $rank = new Rank(90000000001);
+        $this->assertEquals(70, $rank->getLevel());
+        $this->assertEquals(null, $rank->getPointsToAdvance());
 
         $rank = new Rank(null, 64);
         $this->assertEquals(64, $rank->getLevel());

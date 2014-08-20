@@ -193,12 +193,16 @@ class Rank
     
     /**
      * Returns rank points needed to advance to next rank level
-     * @return int Rank points needed to advance
+     * @return int|null Rank points needed to advance or NULL when it's not determined
      */
     public function getPointsToAdvance()
     {
         $ranks = array_values(self::$ranks);
-        return $ranks[$this->level] - $this->points;
+        if (isset($ranks[$this->level])) {
+            return $ranks[$this->level] - $this->points;
+        } else {
+            return null;
+        }
     }
 
     /**
