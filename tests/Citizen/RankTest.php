@@ -8,12 +8,23 @@ class RankTest extends TestCase
 {
     public function testLevels()
     {
+        $e = false;
+        try {
+            $rank = new Rank(-999);
+            $this->assertEquals(1, $rank->getLevel());
+        } catch (\InvalidArgumentException $ex) {
+            $e = true;
+        }
+        $this->assertTrue(true, $e);
+
+
         $rank = new Rank(0);
         $this->assertEquals(1, $rank->getLevel());
 
         $rank = new Rank(328020752);
         $this->assertEquals(64, $rank->getLevel());
         $this->assertEquals('God of War**', $rank->getName());
+        $this->assertEquals(171979248, $rank->getPointsToAdvance());
         $this->assertEquals(
             'http://s1.www.erepublik.net/images/modules/ranks/god_of_war_2.png',
             $rank->getImage()
@@ -24,7 +35,7 @@ class RankTest extends TestCase
         $this->assertEquals('Titan***', $rank->getName());
         $this->assertEquals(79999999999, $rank->getPointsToAdvance());
 
-        $rank = new Rank(90000000001);
+        $rank = new Rank(90000000000);
         $this->assertEquals(70, $rank->getLevel());
         $this->assertEquals(null, $rank->getPointsToAdvance());
 

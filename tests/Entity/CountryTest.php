@@ -1,5 +1,5 @@
 <?php
-namespace Erpk\Common\Tests;
+namespace Erpk\Common\Tests\Entity;
 
 use Erpk\Common\Tests\TestCase;
 

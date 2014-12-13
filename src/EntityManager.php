@@ -2,7 +2,6 @@
 namespace Erpk\Common;
 
 use Doctrine\ORM;
-use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager as DoctrineEntityManager;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Proxy\AbstractProxyFactory;
@@ -49,11 +48,10 @@ class EntityManager extends DoctrineEntityManager
         $config->setProxyNamespace('Erpk\Common\Proxy');
         $config->setAutoGenerateProxyClasses(AbstractProxyFactory::AUTOGENERATE_NEVER);
 
-        $conn = DriverManager::getConnection(
-            array(
+        $conn = DriverManager::getConnection([
                 'driver' => 'pdo_sqlite',
                 'path' => $db
-            ),
+            ],
             $config,
             new EventManager()
         );

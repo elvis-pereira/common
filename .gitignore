@@ -11,3 +11,5 @@ Desktop.ini
 
 vendor/
 composer.lock
+.idea
+phpunit.phar

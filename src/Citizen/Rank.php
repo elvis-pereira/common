@@ -31,122 +31,119 @@ class Rank
      * Ranks table
      * @var array
      */
-    protected static $ranks = array(
-        'Recruit' => 0,
+    protected static $ranks = [
+        1 => ['Recruit', 0],
         
-        'Private'    => 15,
-        'Private*'   => 45,
-        'Private**'  => 80,
-        'Private***' => 120,
+        ['Private', 15],
+        ['Private*', 45],
+        ['Private**', 80],
+        ['Private***', 120],
         
-        'Corporal'    => 170,
-        'Corporal*'   => 250,
-        'Corporal**'  => 350,
-        'Corporal***' => 450,
+        ['Corporal', 170],
+        ['Corporal*', 250],
+        ['Corporal**', 350],
+        ['Corporal***', 450],
         
-        'Sergeant'    => 600,
-        'Sergeant*'   => 800,
-        'Sergeant**'  => 1000,
-        'Sergeant***' => 1400,
+        ['Sergeant', 600],
+        ['Sergeant*', 800],
+        ['Sergeant**', 1000],
+        ['Sergeant***', 1400],
         
-        'Lieutenant'    => 1850,
-        'Lieutenant*'   => 2350,
-        'Lieutenant**'  => 3000,
-        'Lieutenant***' => 3750,
+        ['Lieutenant', 1850],
+        ['Lieutenant*', 2350],
+        ['Lieutenant**', 3000],
+        ['Lieutenant***', 3750],
         
-        'Captain'    => 5000,
-        'Captain*'   => 6500,
-        'Captain**'  => 9000,
-        'Captain***' => 12000,
+        ['Captain', 5000],
+        ['Captain*', 6500],
+        ['Captain**', 9000],
+        ['Captain***', 12000],
         
-        'Major'    => 15500,
-        'Major*'   => 20000,
-        'Major**'  => 25000,
-        'Major***' => 31000,
+        ['Major', 15500],
+        ['Major*', 20000],
+        ['Major**', 25000],
+        ['Major***', 31000],
         
-        'Commander'    => 40000,
-        'Commander*'   => 52000,
-        'Commander**'  => 67000,
-        'Commander***' => 85000,
+        ['Commander', 40000],
+        ['Commander*', 52000],
+        ['Commander**', 67000],
+        ['Commander***', 85000],
         
-        'Lt. Colonel'    => 110000,
-        'Lt. Colonel*'   => 140000,
-        'Lt. Colonel**'  => 180000,
-        'Lt. Colonel***' => 225000,
+        ['Lt. Colonel', 110000],
+        ['Lt. Colonel*', 140000],
+        ['Lt. Colonel**', 180000],
+        ['Lt. Colonel***', 225000],
         
-        'Colonel'    => 285000,
-        'Colonel*'   => 355000,
-        'Colonel**'  => 435000,
-        'Colonel***' => 540000,
+        ['Colonel', 285000],
+        ['Colonel*', 355000],
+        ['Colonel**', 435000],
+        ['Colonel***', 540000],
         
-        'General'    => 660000,
-        'General*'   => 800000,
-        'General**'  => 950000,
-        'General***' => 1140000,
+        ['General', 660000],
+        ['General*', 800000],
+        ['General**', 950000],
+        ['General***', 1140000],
         
-        'Field Marshal'    => 1350000,
-        'Field Marshal*'   => 1600000,
-        'Field Marshal**'  => 1875000,
-        'Field Marshal***' => 2185000,
+        ['Field Marshal', 1350000],
+        ['Field Marshal*', 1600000],
+        ['Field Marshal**', 1875000],
+        ['Field Marshal***', 2185000],
         
-        'Supreme Marshal'    => 2550000,
-        'Supreme Marshal*'   => 3000000,
-        'Supreme Marshal**'  => 3500000,
-        'Supreme Marshal***' => 4150000,
+        ['Supreme Marshal', 2550000],
+        ['Supreme Marshal*', 3000000],
+        ['Supreme Marshal**', 3500000],
+        ['Supreme Marshal***', 4150000],
         
-        'National Force'    => 4900000,
-        'National Force*'   => 5800000,
-        'National Force**'  => 7000000,
-        'National Force***' => 9000000,
+        ['National Force', 4900000],
+        ['National Force*', 5800000],
+        ['National Force**', 7000000],
+        ['National Force***', 9000000],
         
-        'World Class Force'    => 11500000,
-        'World Class Force*'   => 14500000,
-        'World Class Force**'  => 18000000,
-        'World Class Force***' => 22000000,
+        ['World Class Force', 11500000],
+        ['World Class Force*', 14500000],
+        ['World Class Force**', 18000000],
+        ['World Class Force***', 22000000],
         
-        'Legendary Force'    => 26500000,
-        'Legendary Force*'   => 31500000,
-        'Legendary Force**'  => 37000000,
-        'Legendary Force***' => 43000000,
+        ['Legendary Force', 26500000],
+        ['Legendary Force*', 31500000],
+        ['Legendary Force**', 37000000],
+        ['Legendary Force***', 43000000],
         
-        'God of War'    => 50000000,
-        'God of War*'   => 100000000,
-        'God of War**'  => 200000000,
-        'God of War***' => 500000000,
+        ['God of War', 50000000],
+        ['God of War*', 100000000],
+        ['God of War**', 200000000],
+        ['God of War***', 500000000],
 
-        'Titan'    => 1000000000,
-        'Titan*'   => 2000000000,
-        'Titan**'  => 4000000000,
-        'Titan***' => 10000000000,
+        ['Titan', 1000000000],
+        ['Titan*', 2000000000],
+        ['Titan**', 4000000000],
+        ['Titan***', 10000000000],
 
-        '???'      => 90000000000
-    );
+        ['???', 90000000000]
+    ];
 
     /**
      * Construct Rank object
      * @param int $rankPoints Rank points
      * @param int $rankLevel  Rank level (optionally, when null,
-     *                        it will be calculated with rank points)
+     *                        it will be calculated from rank points)
+     * @throws \InvalidArgumentException When rank points is a negative number
      */
     public function __construct($rankPoints, $rankLevel = null)
     {
-        if ($rankLevel === null) {
-            $rankLevel = count(self::$ranks);
-
-            foreach (array_reverse(self::$ranks) as $name => $p) {
-                if ($rankPoints >= $p) {
-                    $this->name  = $name;
-                    $this->level = $rankLevel;
-                    break;
-                }
-                $rankLevel--;
-            }
-        } else {
-            $names = array_keys(self::$ranks);
-            $this->name  = $names[$rankLevel-1];
-            $this->level = $rankLevel;
+        if ($rankPoints < 0) {
+            throw new \InvalidArgumentException("Rank points cannot be negative number");
         }
 
+        if ($rankLevel === null) {
+            $rankLevel = count(self::$ranks);
+            while ($rankLevel > 1 && $rankPoints < self::$ranks[$rankLevel][1]) {
+                $rankLevel--;
+            }
+        }
+
+        $this->name  = self::$ranks[$rankLevel][0];
+        $this->level = $rankLevel;
         $this->points = $rankPoints;
     }
     
@@ -185,7 +182,7 @@ class Rank
     {
         $name = $this->name;
         $n    = substr_count($name, '*');
-        $name = strtr($name, array(' '=>'_', '*'=>'', '.'=>''));
+        $name = strtr($name, [' '=>'_', '*'=>'', '.'=>'']);
         return
             'http://s1.www.erepublik.net/images/modules/ranks/'.
             strtolower($name).'_'.$n.'.png';
@@ -197,12 +194,9 @@ class Rank
      */
     public function getPointsToAdvance()
     {
-        $ranks = array_values(self::$ranks);
-        if (isset($ranks[$this->level])) {
-            return $ranks[$this->level] - $this->points;
-        } else {
-            return null;
-        }
+        return isset(self::$ranks[$this->level + 1])
+            ? self::$ranks[$this->level + 1][1] - $this->points
+            : null;
     }
 
     /**
@@ -211,12 +205,12 @@ class Rank
      */
     public function toArray()
     {
-        return array(
+        return [
             'name'   => $this->getName(),
             'level'  => $this->getLevel(),
             'points' => $this->getPoints(),
             'image'  => $this->getImage(),
             'toNext' => $this->getPointsToAdvance()
-        );
+        ];
     }
 }

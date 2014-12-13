@@ -1,11 +1,10 @@
 <?php
 namespace Erpk\Common;
 
-use DateTime as DT;
 use DateTimeZone;
 use DateInterval;
 
-class DateTime extends DT
+class DateTime extends \DateTime
 {
     const FIRST_DAY = '2007-11-20';
     const ERPK_TIMEZONE = 'America/Los_Angeles';
