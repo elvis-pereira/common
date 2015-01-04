@@ -11,20 +11,20 @@ class Helpers
     const AVATAR_ORIGINAL = null;
 
     /**
-     * Returns citizen's avatar URL
+     * Returns citizen's avatar URL.
      * @param  int        $id         Citizen ID
      * @param  DateTime   $createdAt  Date when citizen was created
-     * @param  int|null   $size       Size of avatar image
+     * @param  int|null   $size       Size of avatar image. Doesn't longer work, left for compatibility.
      * @return string                 Citizen's avatar URL
      */
     public static function getAvatar($id, DateTime $createdAt, $size = null)
     {
         return
-            'http://static.erepublik.net/uploads/avatars/Citizens/'.
+            'http://erpk.static.avatars.s3.amazonaws.com/avatars/Citizens/'.
             $createdAt->format('Y/m/d').'/'.
-            md5($id).($size ? '_'.$size.'x'.$size : '').'.jpg';
+            md5($id).'.jpg';
     }
-    
+
     /**
      * Returns influence made with single hit
      * @param  int  $strength        Citizen's strength
@@ -38,7 +38,7 @@ class Helpers
         $mod = $eliteCitizen ? 1.1 : 1;
         return floor($mod*(10 * (1 + $strength/400) * (1 + $rankLevel/5) * (1 + $firePower/100)));
     }
-    
+
     /**
      * Returns citizen's division
      * @param  int $level Citizen's level

@@ -10,17 +10,8 @@ class HelpersTest extends TestCase
     public function testGetAvatar()
     {
         $platoAvatar =
-            'http://static.erepublik.net/uploads/avatars/'.
+            'http://erpk.static.avatars.s3.amazonaws.com/avatars/'.
             'Citizens/2007/06/04/c81e728d9d4c2f636f067f89cc14862c';
-
-        $this->assertEquals(
-            $platoAvatar.'_142x142.jpg',
-            Helpers::getAvatar(
-                2,
-                new DateTime('2007-06-04'),
-                Helpers::AVATAR_PROFILE
-            )
-        );
 
         $this->assertEquals(
             $platoAvatar.'.jpg',
