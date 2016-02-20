@@ -1,10 +1,7 @@
 {
     "name": "erpk/common",
     "require": {
-        "doctrine/orm": "2.4.*"
-    },
-    "require-dev": {
-        "erpk/api": "1.1.*"
+        "doctrine/orm": "~2.5.4"
     },
     "autoload": {
         "psr-4": {
