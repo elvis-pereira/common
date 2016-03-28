@@ -1,15 +1,2 @@
-
-############
-## Windows
-############
-
-# Windows image file caches
-Thumbs.db
-
-# Folder config file
-Desktop.ini
-
-vendor/
+/vendor
 composer.lock
-.idea
-phpunit.phar
