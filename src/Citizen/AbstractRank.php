@@ -55,6 +55,19 @@ abstract class AbstractRank
     }
 
     /**
+     * Takes rank name and number of stars and returns full URL to image
+     * @param $name
+     * @param $starsCount
+     * @return string
+     */
+    protected static function encodeImageUrl($name, $starsCount)
+    {
+        $name = strtr($name, [' '=>'_', '*'=>'', '.'=>'']);
+        return 'http://s1.www.erepublik.net/images/modules/ranks/'.
+        strtolower($name).'_'.$starsCount.'.png';
+    }
+
+    /**
      * Returns URL to rank image
      * @return string URL to rank image
      */
@@ -64,15 +77,7 @@ abstract class AbstractRank
      * Returns rank points needed to advance to next rank level
      * @return int|null Rank points needed to advance or NULL when it's not determined
      */
-    public function getPointsToAdvance()
-    {
-        if (isset(self::$ranks[$this->level + 1])) {
-            return self::$ranks[$this->level + 1][1] - $this->points;
-        } else {
-            $m = $this->points / 1E10;
-            return (ceil($m) - $m) * 1E10;
-        }
-    }
+    public abstract function getPointsToAdvance();
 
     /**
      * Converts object to array

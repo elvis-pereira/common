@@ -3,6 +3,10 @@ namespace Erpk\Common\Citizen;
 
 class AirRank extends AbstractRank
 {
+    /**
+     * Ranks table
+     * @var array
+     */
     protected static $ranks = [
         1 => ['Airman', 0],
 
@@ -84,11 +88,9 @@ class AirRank extends AbstractRank
             while ($rankLevel > 1 && $rankPoints < self::$ranks[$rankLevel][1]) {
                 $rankLevel--;
             }
-            $this->name = self::$ranks[$rankLevel][0];
-        } else {
-            $this->name = self::$ranks[$rankLevel][0];
         }
 
+        $this->name = self::$ranks[$rankLevel][0];
         $this->level = $rankLevel;
         $this->points = $rankPoints;
     }
@@ -99,11 +101,17 @@ class AirRank extends AbstractRank
      */
     public function getImage()
     {
-        $name = $this->name;
-        $n    = substr_count($name, '*');
-        $name = strtr($name, [' '=>'_', '*'=>'', '.'=>'']);
-        return
-            'http://s1.www.erepublik.net/images/modules/ranks/'.
-            strtolower($name).'_'.$n.'.png';
+        return self::encodeImageUrl($this->name, substr_count($this->name, '*'));
+    }
+
+    /**
+     * Returns rank points needed to advance to next rank level
+     * @return int|null Rank points needed to advance or NULL when it's not determined
+     */
+    public function getPointsToAdvance()
+    {
+        return isset(self::$ranks[$this->level + 1])
+            ? self::$ranks[$this->level + 1][1] - $this->points
+            : null; // We only know about first 50 ranks.
     }
 }

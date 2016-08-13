@@ -1,7 +1,7 @@
 <?php
 namespace Erpk\Common\Citizen;
 
-class Rank
+class Rank extends AbstractRank
 {
     /**
      * Ranks table
@@ -9,82 +9,82 @@ class Rank
      */
     protected static $ranks = [
         1 => ['Recruit', 0],
-        
+
         ['Private', 15],
         ['Private*', 45],
         ['Private**', 80],
         ['Private***', 120],
-        
+
         ['Corporal', 170],
         ['Corporal*', 250],
         ['Corporal**', 350],
         ['Corporal***', 450],
-        
+
         ['Sergeant', 600],
         ['Sergeant*', 800],
         ['Sergeant**', 1000],
         ['Sergeant***', 1400],
-        
+
         ['Lieutenant', 1850],
         ['Lieutenant*', 2350],
         ['Lieutenant**', 3000],
         ['Lieutenant***', 3750],
-        
+
         ['Captain', 5000],
         ['Captain*', 6500],
         ['Captain**', 9000],
         ['Captain***', 12000],
-        
+
         ['Major', 15500],
         ['Major*', 20000],
         ['Major**', 25000],
         ['Major***', 31000],
-        
+
         ['Commander', 40000],
         ['Commander*', 52000],
         ['Commander**', 67000],
         ['Commander***', 85000],
-        
+
         ['Lt. Colonel', 110000],
         ['Lt. Colonel*', 140000],
         ['Lt. Colonel**', 180000],
         ['Lt. Colonel***', 225000],
-        
+
         ['Colonel', 285000],
         ['Colonel*', 355000],
         ['Colonel**', 435000],
         ['Colonel***', 540000],
-        
+
         ['General', 660000],
         ['General*', 800000],
         ['General**', 950000],
         ['General***', 1140000],
-        
+
         ['Field Marshal', 1350E3],
         ['Field Marshal*', 1600E3],
         ['Field Marshal**', 1875E3],
         ['Field Marshal***', 2185E3],
-        
+
         ['Supreme Marshal', 255E4],
         ['Supreme Marshal*', 300E4],
         ['Supreme Marshal**', 350E4],
         ['Supreme Marshal***', 415E4],
-        
+
         ['National Force', 49E5],
         ['National Force*', 58E5],
         ['National Force**', 70E5],
         ['National Force***', 90E5],
-        
+
         ['World Class Force', 115E5],
         ['World Class Force*', 145E5],
         ['World Class Force**', 180E5],
         ['World Class Force***', 220E5],
-        
+
         ['Legendary Force', 265E5],
         ['Legendary Force*', 315E5],
         ['Legendary Force**', 370E5],
         ['Legendary Force***', 430E5],
-        
+
         ['God of War', 5E7],
         ['God of War*', 10E7],
         ['God of War**', 20E7],
@@ -253,23 +253,29 @@ class Rank
 
         return $roman;
     }
-    
+
     /**
      * Returns URL to rank image
      * @return string URL to rank image
      */
     public function getImage()
     {
-        if ($this->level <= count(self::$ranks)) {
-            $name = $this->name;
-            $n    = substr_count($name, '*');
-            $name = strtr($name, [' '=>'_', '*'=>'', '.'=>'']);
+        return $this->level <= count(self::$ranks)
+            ? self::encodeImageUrl($this->name, substr_count($this->name, '*'))
+            : self::encodeImageUrl('legendary', $this->level - count(self::$ranks) - 1);
+    }
+
+    /**
+     * Returns rank points needed to advance to next rank level
+     * @return int|null Rank points needed to advance or NULL when it's not determined
+     */
+    public function getPointsToAdvance()
+    {
+        if (isset(self::$ranks[$this->level + 1])) {
+            return self::$ranks[$this->level + 1][1] - $this->points;
         } else {
-            $n = $this->level - count(self::$ranks) - 1;
-            $name = 'legendary';
+            $m = $this->points / 1E10;
+            return (ceil($m) - $m) * 1E10;
         }
-        return
-            'http://s1.www.erepublik.net/images/modules/ranks/'.
-            strtolower($name).'_'.$n.'.png';
     }
 }
